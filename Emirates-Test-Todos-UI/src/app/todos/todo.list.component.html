@@ -1,0 +1,51 @@
+<div class="container-fluid">
+    <div class="col-10 container">
+        <form name="todoSaveForm">
+            <div class="form-group">
+                <label for="todoText">Todo Description</label> <input name="todoText" type="text" class="form-control col-6" [(ngModel)]="newTodo.text" />
+            </div>
+            <div class="form-group">
+                <label for="todoStatus">Status</label>
+                <input name="todoStatus" type="radio" class=" col-1" [(ngModel)]="newTodo.status" [value]="'C'" /> Completed
+                <input name="todoStatus" type="radio" class=" col-1" [(ngModel)]="newTodo.status" [value]="'P'" /> Pending
+            </div>
+            <div class="form-group">
+                <label for="todoText">Priority</label> <select name="priorityLevel" [(ngModel)]="newTodo.priorityLevel">
+					<option [value]="1">High</option>
+					<option [value]="2">Medium</option>
+					<option [value]="3">Low</option>
+				</select>
+            </div>
+            <div class="col-10">
+                <button (click)="onSaveTodo()" class="btn-primary">Save</button>
+                <button (click)="refreshList()" class="btn-primary">Refresh</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-md-10 container">
+        <table class="table table-responsive table-bordered">
+            <thead>
+                <th>Todo Item</th>
+                <th>Priority</th>
+                <th>Status</th>
+                <th>Last Updated</th>
+                <th>Action</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of todoListItem">
+                    <td><span>{{item.text}}</span></td>
+                    <td [ngSwitch]="item.priorityLevel"><span *ngSwitchCase="1">High</span>
+                        <span *ngSwitchCase="2">Medium</span> <span *ngSwitchCase="3">Low</span>
+                    </td>
+                    <td [ngSwitch]="item.status"><span *ngSwitchCase="'C'">Completed</span>
+                        <span *ngSwitchCase="'P'">Pending</span></td>
+                    <td><span>{{item.lastModifiedOn | date:'y MMM d h:m a'
+							}}</span></td>
+                    <td><button value="Delete" (click)="onDelete(item)">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
