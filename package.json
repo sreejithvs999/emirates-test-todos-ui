@@ -1,0 +1,7 @@
+{
+  "name": "emites-test-todos-ui",
+  "version": "0.1.0",
+  "scripts": {
+    "postinstall": "npm install --prefix Emirates-Test-Todos-UI"
+  }
+}
